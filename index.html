@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="./main.css">
 </head>
 
-<body>
+<script id='app_template' type='text/ractive'>
   <nav role="navigation" class="orange">
     <div class="nav-wrapper container">
       <a href="https://kii.com" class="brand-logo">Kii Cloud for curl</a>
@@ -26,29 +26,29 @@
         <div class="row">
           <div class="col s2">
             <p>
-            <input name="site" type="radio" id="site_us" />
+            <input name="{{app.site}}" value='us' type="radio" id="site_us" />
             <label for="site_us">US</label>
             </p>
             <p>
-            <input name="site" type="radio" id="site_jp" />
+            <input name="{{app.site}}" value='jp' type="radio" id="site_jp" />
             <label for="site_jp">JP</label>
             </p>
             <p>
-            <input name="site" type="radio" id="site_cn" />
+            <input name="{{app.site}}" value='cn' type="radio" id="site_cn" />
             <label for="site_cn">CN</label>
             </p>
             <p>
-            <input name="site" type="radio" id="site_sg" />
+            <input name="{{app.site}}" value='sg' type="radio" id="site_sg" />
             <label for="site_sg">SG</label>
             </p>
           </div>
 
           <div class="input-field col s5">
-            <input id="app_id" type="text">
+            <input id="app_id" type="text" value='{{app.id}}'>
             <label for="app_id">App ID</label>
           </div>
           <div class="input-field col s5">
-            <input id="app_key" type="text">
+            <input id="app_key" type="text" value='{{app.key}}'>
             <label for="app_key">App Key</label>
           </div>
         </div>
@@ -63,15 +63,15 @@
         <div class="collapsible-body row">
           <div class="col s10 offset-s1">
             <div class="input-field row">
-              <input id="client_id" type="text">
+              <input id="client_id" type="text" value='{{app.client_id}}'>
               <label for="client_id">Client ID</label>
             </div>
             <div class="input-field row">
-              <input id="client_secret" type="text">
+              <input id="client_secret" type="text" value='{{app.client_secret}}'>
               <label for="client_secret">Client Secret</label>
             </div>
             <div class="row">
-              <a id="curl-admin-token" class="waves-effect waves-light btn">Admin Token</a>
+              <a id="curl-admin-token" class="waves-effect waves-light btn" on-click='generate("admin-token")'>Admin Token</a>
             </div>
           </div>
         </div>
@@ -83,15 +83,15 @@
         <div class="collapsible-body row">
           <div class="col s10 offset-s1">
             <div class="input-field row">
-              <input id="user_name" type="text">
+              <input id="user_name" type="text" value='{{user.name}}'>
               <label for="user_name">Login Name/ID</label>
             </div>
             <div class="input-field row">
-              <input id="user_pass" type="text">
+              <input id="user_pass" type="text" value='{{user.password}}'>
               <label for="user_pass">Password</label>
             </div>
             <div class="row">
-              <a id="curl-user-login" class="waves-effect waves-light btn">Login</a>
+              <a id="curl-user-login" class="waves-effect waves-light btn" on-click='generate("user-login")'>Login</a>
             </div>
           </div>
         </div>
@@ -115,14 +115,19 @@
         <div class="card-content">
           <span class="card-title orange-text">curl command</span>
           <div class="input-field">
-            <textarea id="curl_command" class="materialize-textarea" readonly>curl -H ""</textarea>
+            <textarea id="curl_command" class="materialize-textarea" readonly value='{{curl.command}}'></textarea>
           </div>
         </div>
       </div>
     </div>
   </footer>
+</script>
 
+<body id='app_container'>
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
+  <script src='http://cdn.ractivejs.org/latest/ractive.js'></script>
+  <script src="./main.js"></script>
 </body>
+
 </html>
