@@ -50,7 +50,7 @@
               </div>
             </div>
             <div class="input-field">
-              <input id="app_custom_site" type="text" value='{{app.custom_site}}' placeholder="https://api.example.org/api">
+              <input id="app_custom_site" type="text" value='{{app.custom_site}}' placeholder="https://api.example.org/api" disabled='{{app.site != "custom"}}'>
               <label for="app_custom_site">Custom Site URL</label>
             </div>
           </div>
