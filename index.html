@@ -13,7 +13,7 @@
 <script id='app_template' type='text/ractive'>
   <nav role="navigation" class="orange">
     <div class="nav-wrapper container">
-      <a href="https://kii.com" class="brand-logo">Kii Cloud for curl</a>
+      <span class="brand-logo">Kii Cloud for curl</span>
     </div>
   </nav>
 
@@ -126,6 +126,7 @@
           <div class="input-field">
             <textarea id="curl_command" class="materialize-textarea" readonly value='{{curl.command}}'></textarea>
           </div>
+          <a id="curl_copy_to_clipboard" class="waves-effect waves-light btn">Copy to Clipboard</a>
         </div>
       </div>
     </div>
@@ -133,11 +134,12 @@
 </script>
 
 <body id='app_container'>
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
+  <script src='https://code.jquery.com/jquery-2.1.1.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js'></script>
   <script src='http://cdn.ractivejs.org/latest/ractive.js'></script>
-  <script src="./generator.js"></script>
-  <script src="./main.js"></script>
+  <script src='./libs/ZeroClipboard.min.js'></script>
+  <script src='./generator.js'></script>
+  <script src='./main.js'></script>
 </body>
 
 </html>
