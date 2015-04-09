@@ -6,12 +6,15 @@ View = Ractive.extend {
 
   init: () ->
     c = new ZeroClipboard @find '#curl_copy_to_clipboard'
-    c.on 'ready', () =>
+    c.on 'ready', (event) =>
       c.on 'copy', (event) =>
         d = event.clipboardData
         d.setData 'text/plain', @get 'curl.command'
-    c.on 'error', (event) =>
+        return
+      return
+    c.on 'error', (event) ->
       ZeroClipboard.destroy()
+      return
 
   generate: (cmd) ->
     @generator.generate @, cmd
