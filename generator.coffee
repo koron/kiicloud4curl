@@ -26,6 +26,9 @@ class @Generator
       'X-Kii-AppKey': key
     }
 
+  expiresAt: (min) ->
+    Date.now() + min * 60 * 1000
+
   setCurlCommand: (view, cmd) ->
     view.set 'curl.command', cmd.join ' '
 
@@ -34,8 +37,10 @@ class @Generator
     cmd.push '-X', 'POST'
     if header?
       for n, v of header
-        cmd.push '-H', "\"#{n}=#{v}\""
+        cmd.push '-H', "\"#{n}:#{v}\""
     if data?
+      if not header['Content-Type']?
+        cmd.push '-H', '"Content-Type:application/json"'
       cmd.push '-d', "'#{JSON.stringify data}'"
     cmd.push url
     return cmd
@@ -51,7 +56,8 @@ class @Generator
     header = @headerApp view, {}
     cmd = @buildCurlCommand url, header, {
       client_id: view.get 'app.client_id'
-      client_key: view.get 'app.client_secret'
+      client_secret: view.get 'app.client_secret'
+      expiresAt: @expiresAt(15)
     }
     @setCurlCommand view, cmd
 
@@ -61,5 +67,6 @@ class @Generator
     cmd = @buildCurlCommand url, header, {
       username: view.get 'user.name'
       password: view.get 'user.password'
+      expiresAt: @expiresAt(60)
     }
     @setCurlCommand view, cmd
