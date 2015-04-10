@@ -15,18 +15,33 @@ class Storage
   @toString: (s) ->
     return if s? then s else ''
 
-  read: (view) ->
+  restore: (view) ->
     if sessionStorage?
       data = {}
       for id in Storage.TARGETS
         data[id] = Storage.toString sessionStorage.getItem id
-      view.set(data)
+      view.set data
     return
 
-  save: (view) ->
+  save: (view, target) ->
     if sessionStorage?
       for id in Storage.TARGETS
-        sessionStorage.setItem id, Storage.toString view.get id
+        @update view, id
+    return
+
+  update: (view, id) ->
+    if sessionStorage? and id?
+      sessionStorage.setItem id, Storage.toString view.get id
+    return
+
+  installObserver: (view) ->
+    observer = (nv, ov, path) =>
+      @update view, path
+    for id in Storage.TARGETS
+      view.observe id, observer, {
+        init: false
+        defer: true
+      }
     return
 
 
@@ -35,7 +50,8 @@ View = Ractive.extend {
   generator: null
   storage: null
 
-  init: () ->
+  onrender: () ->
+    # Install ZeroClipboard
     c = new ZeroClipboard @find '#curl_copy_to_clipboard'
     c.on 'ready', (event) =>
       c.on 'copy', (event) =>
@@ -46,23 +62,20 @@ View = Ractive.extend {
     c.on 'error', (event) ->
       ZeroClipboard.destroy()
       return
-    @load()
+    if @storage?
+      @storage.restore @
+      @storage.installObserver @
+    return
 
   generate: (cmd) ->
     @generator?.generate @, cmd
-    @save()
-
-  save: ()->
     @storage?.save @
-
-  load: ()->
-    @storage?.read @
 }
 
 
-new View {
+@V = new View {
   el: '#app_container'
-  generator: new Generator()
-  storage: new Storage()
-  data: {}
+  generator: @G = new Generator()
+  storage: @S = new Storage()
+  data: @D = {}
 }
