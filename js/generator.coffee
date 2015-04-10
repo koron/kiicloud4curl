@@ -10,15 +10,18 @@ SITE = {
 
 class @Generator
   site: (view) ->
-    return SITE[view.get('app.site')]
+    site = view.get 'app.site'
+    if site == 'custom'
+      return view.get 'app.custom_site'
+    return SITE[site]
 
   path: (view, path) ->
     s = @site view
     return if s? then s + path else null
 
   headerApp: (view, userdata) ->
-    id = view.get('app.id')
-    key = view.get('app.key')
+    id = view.get 'app.id'
+    key = view.get 'app.key'
     if id == '' or key == ''
       return null
     return {
@@ -57,7 +60,7 @@ class @Generator
     cmd = @buildCurlCommand url, header, {
       client_id: view.get 'app.client_id'
       client_secret: view.get 'app.client_secret'
-      expiresAt: @expiresAt(15)
+      expiresAt: @expiresAt 15
     }
     @setCurlCommand view, cmd
 
@@ -67,6 +70,6 @@ class @Generator
     cmd = @buildCurlCommand url, header, {
       username: view.get 'user.name'
       password: view.get 'user.password'
-      expiresAt: @expiresAt(60)
+      expiresAt: @expiresAt 60
     }
     @setCurlCommand view, cmd
