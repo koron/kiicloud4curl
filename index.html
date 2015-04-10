@@ -1,70 +1,70 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'/>
 
   <title>Kii Cloud for curl - curl commands generator</title>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
-  <link rel="stylesheet" href="./main.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css'>
+  <link rel='stylesheet' href='./main.css'>
 </head>
 
 <script id='app_template' type='text/ractive'>
-  <nav role="navigation" class="orange">
-    <div class="nav-wrapper container">
-      <span class="brand-logo">Kii Cloud for curl</span>
+  <nav role='navigation' class='orange'>
+    <div class='nav-wrapper container'>
+      <span class='brand-logo'>Kii Cloud for curl</span>
     </div>
   </nav>
 
-  <div class="main container">
+  <div class='main container'>
 
-    <ul class="collapsible popout" data-collapsible="accordion">
+    <ul class='collapsible popout' data-collapsible='accordion'>
 
       <!-- App Info -->
       <li>
-        <div class="collapsible-header active"><i class="mdi-action-lock"></i>App Info</div>
-        <div class="collapsible-body">
-          <div class="section">
+        <div class='collapsible-header active'><i class='mdi-action-lock'></i>App Info</div>
+        <div class='collapsible-body'>
+          <div class='section'>
             <h5>Site</h5>
-            <div class="row">
-              <div class="col s2">
-                <input type='radio' id="site_us" name="{{app.site}}" value='us' />
-                <label for="site_us">US</label>
+            <div class='row'>
+              <div class='col s2'>
+                <input type='radio' id='site_us' name='{{app.site}}' value='us' />
+                <label for='site_us'>US</label>
               </div>
-              <div class="col s2">
-                <input type='radio' id="site_jp" name="{{app.site}}" value='jp' />
-                <label for="site_jp">JP</label>
+              <div class='col s2'>
+                <input type='radio' id='site_jp' name='{{app.site}}' value='jp' />
+                <label for='site_jp'>JP</label>
               </div>
-              <div class="col s2">
-                <input type='radio' id="site_cn" name="{{app.site}}" value='cn' />
-                <label for="site_cn">CN</label>
+              <div class='col s2'>
+                <input type='radio' id='site_cn' name='{{app.site}}' value='cn' />
+                <label for='site_cn'>CN</label>
               </div>
-              <div class="col s2">
-                <input type='radio' id="site_sg" name="{{app.site}}" value='sg' />
-                <label for="site_sg">SG</label>
+              <div class='col s2'>
+                <input type='radio' id='site_sg' name='{{app.site}}' value='sg' />
+                <label for='site_sg'>SG</label>
               </div>
-              <div class="col s2">
-                <input type='radio' id="site_custom" name="{{app.site}}" value='custom' />
-                <label for="site_custom">Custom</label>
+              <div class='col s2'>
+                <input type='radio' id='site_custom' name='{{app.site}}' value='custom' />
+                <label for='site_custom'>Custom</label>
               </div>
             </div>
-            <div class="input-field">
-              <input id="app_custom_site" type="text" value='{{app.custom_site}}' placeholder="https://api.example.org/api" disabled='{{app.site != "custom"}}'>
-              <label for="app_custom_site">Custom Site URL</label>
+            <div class='input-field'>
+              <input id='app_custom_site' type='text' value='{{app.custom_site}}' placeholder='https://api.example.org/api' disabled='{{app.site != "custom"}}'>
+              <label for='app_custom_site'>Custom Site URL</label>
             </div>
           </div>
 
-          <div class="section">
+          <div class='section'>
             <h5>ID and Key</h5>
-            <div class="row">
-            <div class="input-field col s6">
-              <input id="app_id" type="text" value='{{app.id}}'>
-              <label for="app_id">App ID</label>
+            <div class='row'>
+            <div class='input-field col s6'>
+              <input id='app_id' type='text' value='{{app.id}}'>
+              <label for='app_id'>App ID</label>
             </div>
-            <div class="input-field col s6">
-              <input id="app_key" type="text" value='{{app.key}}'>
-              <label for="app_key">App Key</label>
+            <div class='input-field col s6'>
+              <input id='app_key' type='text' value='{{app.key}}'>
+              <label for='app_key'>App Key</label>
             </div>
             </div>
           </div>
@@ -72,44 +72,44 @@
       </li>
       <!-- Admin -->
       <li>
-        <div class="collapsible-header"><i class="mdi-hardware-security"></i>Admin</div>
-        <div class="collapsible-body">
-          <div class="input-field">
-            <input id="client_id" type="text" value='{{app.client_id}}'>
-            <label for="client_id">Client ID</label>
+        <div class='collapsible-header'><i class='mdi-hardware-security'></i>Admin</div>
+        <div class='collapsible-body'>
+          <div class='input-field'>
+            <input id='client_id' type='text' value='{{app.client_id}}'>
+            <label for='client_id'>Client ID</label>
           </div>
-          <div class="input-field">
-            <input id="client_secret" type="text" value='{{app.client_secret}}'>
-            <label for="client_secret">Client Secret</label>
+          <div class='input-field'>
+            <input id='client_secret' type='text' value='{{app.client_secret}}'>
+            <label for='client_secret'>Client Secret</label>
           </div>
-          <div class="">
-            <a id="curl-admin-token" class="waves-effect waves-light btn" on-click='generate("admin-token")'>Admin Token</a>
+          <div class=''>
+            <a id='curl-admin-token' class='waves-effect waves-light btn' on-click='generate("admin-token")'>Admin Token</a>
           </div>
         </div>
       </li>
 
       <!-- User -->
       <li>
-        <div class="collapsible-header"><i class="mdi-action-account-box"></i>User</div>
-        <div class="collapsible-body">
-          <div class="input-field">
-            <input id="user_name" type="text" value='{{user.name}}'>
-            <label for="user_name">Login Name/ID</label>
+        <div class='collapsible-header'><i class='mdi-action-account-box'></i>User</div>
+        <div class='collapsible-body'>
+          <div class='input-field'>
+            <input id='user_name' type='text' value='{{user.name}}'>
+            <label for='user_name'>Login Name/ID</label>
           </div>
-          <div class="input-field">
-            <input id="user_pass" type="text" value='{{user.password}}'>
-            <label for="user_pass">Password</label>
+          <div class='input-field'>
+            <input id='user_pass' type='text' value='{{user.password}}'>
+            <label for='user_pass'>Password</label>
           </div>
-          <div class="">
-            <a id="curl-user-login" class="waves-effect waves-light btn" on-click='generate("user-login")'>Login</a>
+          <div class=''>
+            <a id='curl-user-login' class='waves-effect waves-light btn' on-click='generate("user-login")'>Login</a>
           </div>
         </div>
       </li>
 
       <!-- Object -->
       <li>
-        <div class="collapsible-header"><i class="mdi-action-description"></i>Object</div>
-        <div class="collapsible-body">
+        <div class='collapsible-header'><i class='mdi-action-description'></i>Object</div>
+        <div class='collapsible-body'>
           <p>Not implemented yet</p>
         </div>
       </li>
@@ -118,15 +118,15 @@
     <!-- TODO -->
   </div>
 
-  <footer class="page-footer orange">
-    <div class="container">
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title orange-text">curl command</span>
-          <div class="input-field">
-            <textarea id="curl_command" class="materialize-textarea" readonly value='{{curl.command}}'></textarea>
+  <footer class='page-footer orange'>
+    <div class='container'>
+      <div class='card'>
+        <div class='card-content'>
+          <span class='card-title orange-text'>curl command</span>
+          <div class='input-field'>
+            <textarea id='curl_command' class='materialize-textarea' readonly value='{{curl.command}}'></textarea>
           </div>
-          <a id="curl_copy_to_clipboard" class="waves-effect waves-light btn">Copy to Clipboard</a>
+          <a id='curl_copy_to_clipboard' class='waves-effect waves-light btn'>Copy to Clipboard</a>
         </div>
       </div>
     </div>
