@@ -51,6 +51,7 @@ View = Ractive.extend {
   storage: null
 
   onrender: () ->
+    injectClasses null, this.el
     # Install ZeroClipboard
     c = new ZeroClipboard @find '#curl_copy_to_clipboard'
     c.on 'ready', (event) =>
